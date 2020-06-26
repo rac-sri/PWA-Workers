@@ -1,16 +1,29 @@
-(function Blog(){
-	"use strict";
+(function Blog() {
+  "use strict";
 
-	var offlineIcon;
-	var isLoggedIn = /isLoggedIn=1/.test(document.cookie.toString() || "");
+  var offlineIcon;
+  var isOnline = "onLine" in navigator ? navigator.onLine : true; // feature detection
+  var isLoggedIn = /isLoggedIn=1/.test(document.cookie.toString() || "");
 
-	document.addEventListener("DOMContentLoaded",ready,false);
+  document.addEventListener("DOMContentLoaded", ready, false);
 
+  // **********************************
 
-	// **********************************
+  function ready() {
+    console.log(isOnline);
+    offlineIcon = document.getElementById("connectivity-status");
+    if (!isOnline) {
+      offlineIcon.classList.remove("hidden");
+    }
+    window.addEventListener("online", function online() {
+      console.log("online");
+      offlineIcon.classList.add("hidden");
+      isOnline = true;
+    });
 
-	function ready() {
-		offlineIcon = document.getElementById("connectivity-status");
-	}
-
+    window.addEventListener("offline", function offline() {
+      offlineIcon.classList.remove("hidden");
+      isOnline = false;
+    });
+  }
 })();
