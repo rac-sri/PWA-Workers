@@ -1,15 +1,3 @@
-# Exploring Service Workers
-
-Kyle Simpson
-@getify
-
-getify@gmail.com
-
-## Starter Files
-
-This package contains the starter files for the Web Workers and Service Workers sections of the course
-
-For the solutions and additional info, head to the course repo: https://github.com/FrontendMasters/service-workers-offline
 
 ## Links
 
