@@ -1,6 +1,6 @@
 "use strict";
 
-const version = 4;
+const version = 5;
 
 var isOnline = true;
 var isLoggedIn = false;
@@ -28,6 +28,7 @@ var urlsToCache = {
 self.addEventListener("install", onInstall);
 self.addEventListener("activate", onActivate);
 self.addEventListener("message", onMessage);
+self.addEventListener("fetch", onFetch);
 
 main().catch(console.error);
 
@@ -65,6 +66,40 @@ async function onInstall(evt) {
 function onActivate(evt) {
   // tell browser I am still doing important stuff, dont shut me down please ( though not gauranteed)
   evt.waitUntil(handleActivation());
+}
+
+function onFetch(evt) {
+  evt.respondWith(router(evt.request));
+}
+
+async function router(req) {
+  var url = new URL(req.url);
+  var reqURL = url.pathname;
+  var cache = await caches.open(cacheName);
+  let res;
+  if (url.origin == location.origin) {
+    try {
+      let fetchOptions = {
+        method: req.method,
+        headers: req.headers,
+        credentials: "omit",
+        cache: "no-store",
+      };
+
+      res = await fetch(reqURL, fetchOptions);
+      if (res && res.ok) {
+        // cache if successful res
+        await cache.put(reqURL, res.clone());
+        return res;
+      }
+    } catch (err) {
+      // failed to get it from server so now check the cache
+      res = await cache.match(reqURL);
+      if (res) {
+        return res.clone();
+      }
+    }
+  }
 }
 
 async function handleActivation() {
