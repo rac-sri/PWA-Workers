@@ -1,1 +1,1 @@
-Source code for Service/Web Worker Tutorial
+Source code for Service/Web + PWA Worker Tutorial
