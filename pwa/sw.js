@@ -1,4 +1,5 @@
-const cacheName = "site-static";
+const cacheName = "site-static-v2";
+const dynamiCache = "site-dynamic-1";
 const assets = [
   "/",
   "/index.html",
@@ -14,9 +15,11 @@ const assets = [
 ];
 
 self.addEventListener("install", (evt) => {
+  //console.log('service worker installed');
   evt.waitUntil(
-    caches.open(cacheName).then((cache) => {
-      caches.addAll(assets);
+    caches.open(staticCacheName).then((cache) => {
+      console.log("caching shell assets");
+      cache.addAll(assets);
     })
   );
 });
@@ -27,7 +30,9 @@ self.addEventListener("activate", (evt) => {
   evt.waitUntil(
     caches.keys().then((keys) => {
       return Promise.all(
-        keys.filter((key) => key != cacheName).map((key) => caches.delete(key))
+        keys
+          .filter((key) => key !== cacheName && key !== dynamiCache)
+          .map((key) => caches.delete(key))
       );
     })
   );
@@ -38,7 +43,20 @@ self.addEventListener("fetch", (evt) => {
 
   evt.respondWith(
     caches.match(evt.request).then((cache) => {
-      return cache || fetch(evt.request);
+      return (
+        cache ||
+        fetch(evt.request)
+          .then((fetches) => {
+            return caches.open(dynamiCache).then((cache) => {
+              cache.put(evt.request.url, fetches.clone());
+              return fetches;
+            });
+          })
+          .catch(() => {
+            if (evt.request.url.indexOf(".html") > -1)
+              caches.match("/pages/fallback.html");
+          })
+      );
     })
   );
 });
