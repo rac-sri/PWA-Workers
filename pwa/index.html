@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <meta name="theme-color" content="#FFE1C4">
     <link rel="manifest" href="./manifest.json" />
-    <title>Food Ninja</title>
+    <title>PWA</title>
     <met
     <!-- materialize icons, css & js -->
     <link type="text/css" href="./css/materialize.min.css" rel="stylesheet" />
@@ -44,46 +44,7 @@
 
     <!-- recipes -->
     <div class="recipes container grey-text text-darken-1">
-      <div class="card-panel recipe white row">
-        <img src="./img/dish.png" alt="recipe thumb" />
-        <div class="recipe-details">
-          <div class="recipe-title">Edame Noodles</div>
-          <div class="recipe-ingredients">Edame Beans, Noodels, Garlic oil</div>
-        </div>
-        <div class="recipe-delete">
-          <i class="material-icons">delete_outline</i>
-        </div>
-      </div>
-      <div class="card-panel recipe white row">
-        <img src="./img/dish.png" alt="recipe thumb" />
-        <div class="recipe-details">
-          <div class="recipe-title">Edame Noodles</div>
-          <div class="recipe-ingredients">Edame Beans, Noodels, Garlic oil</div>
-        </div>
-        <div class="recipe-delete">
-          <i class="material-icons">delete_outline</i>
-        </div>
-      </div>
-      <div class="card-panel recipe white row">
-        <img src="./img/dish.png" alt="recipe thumb" />
-        <div class="recipe-details">
-          <div class="recipe-title">Edame Noodles</div>
-          <div class="recipe-ingredients">Edame Beans, Noodels, Garlic oil</div>
-        </div>
-        <div class="recipe-delete">
-          <i class="material-icons">delete_outline</i>
-        </div>
-      </div>
-      <div class="card-panel recipe white row">
-        <img src="./img/dish.png" alt="recipe thumb" />
-        <div class="recipe-details">
-          <div class="recipe-title">Edame Noodles</div>
-          <div class="recipe-ingredients">Edame Beans, Noodels, Garlic oil</div>
-        </div>
-        <div class="recipe-delete">
-          <i class="material-icons">delete_outline</i>
-        </div>
-      </div>
+      
     </div>
 
     <div class="center">
@@ -123,8 +84,33 @@
         </div>
       </form>
     </div>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-firestore.js"></script>
 
-    <script src="./js/ui.js"></script>
-    <script src="./js/app.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-analytics.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyAcF0lXQU1UEKp4GhgWX3-AMRnM7mjaXjg",
+    authDomain: "pwa-beg.firebaseapp.com",
+    databaseURL: "https://pwa-beg.firebaseio.com",
+    projectId: "pwa-beg",
+    storageBucket: "pwa-beg.appspot.com",
+    messagingSenderId: "523535914818",
+    appId: "1:523535914818:web:20ed84b3c892f0692ddadb",
+    measurementId: "G-29Z1W31KD8"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+  const db = firebase.firestore();
+  firebase.analytics();
+</script>
+<script src="./js/ui.js"></script>
+<script src="./js/app.js"></script>
+<script src="./js/db.js"></script>
   </body>
 </html>
