@@ -1,4 +1,4 @@
-Source code for Service/Web + PWA Worker Tutorial
+Source code for Service/Web + PWA Worker Tutorial content and 1 Project.
 
 ## Demo
 
