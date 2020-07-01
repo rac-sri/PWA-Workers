@@ -2,7 +2,8 @@ Source code for Service/Web + PWA Worker Tutorial
 
 ## Demo
 
-[Link](https://first-e292e.web.app/)
+[Web](https://pwa-beg.web.app/)
+[PWA](https://pwa-beg.firebaseapp.com/)
 
 ## Links
 
