@@ -2,7 +2,7 @@ Source code for Service/Web + PWA Worker Tutorial
 
 ## Demo
 
-![](https://first-e292e.web.app/)
+[Link](https://first-e292e.web.app/)
 
 ## Links
 
